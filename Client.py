@@ -2,7 +2,7 @@ import socket
 import select
 import errno
 import sys
-import threading
+from noblockinput import *
 
 HEADER_LENGTH = 10
 
@@ -19,11 +19,26 @@ username = my_username.encode("utf-8")
 username_header = f"{len(username):<{HEADER_LENGTH}}".encode("utf-8")
 client_socket.send(username_header + username)
 
-
+kb = KBHit()
+inp = '\r'
 
 while True:
-    
-    message = input(f"{my_username}>")
+    #unbloking input
+    message = 0
+    if kb.kbhit():
+        c = kb.getch()
+        if c:         
+            if c=='\r':
+                message = inp
+                print('')
+                inp = '\r'
+            else:
+                print(c,end='')
+                if inp == '\r':
+                    inp = c
+                else:
+                    inp +=c
+    #message = input(f"{my_username}>")
     if message:
         message = message.encode("utf-8")
         message_header = f"{len(message):<{HEADER_LENGTH}}".encode("utf-8")

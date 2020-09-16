@@ -24,6 +24,9 @@
     <Compile Include="Client.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="noblockinput.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Server.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
